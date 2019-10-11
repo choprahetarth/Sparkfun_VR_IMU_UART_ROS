@@ -20,6 +20,7 @@ reserveBITCounter = 0
 queueChecker = 1
 position = 0 
 initMappingCounter = 0
+discardCount = 0 
 mappingCounter = 1
 checkingCounter = 1
 startLSBposition = 0
@@ -37,27 +38,30 @@ def linearSearch(arr, x):
             counter = counter +1
     return results
 
-    
-
-def mapped():
-    if checkingCounter ==2:
-        print ("i am being called")
-        mappingCounter = 0
 
 while True:
     for c in ser.readline().hex():
         seq.append(c)
         count += 1
         if count == 38:
-            linearSearch(seq,'a')
+            discardCount = discardCount +1
+            if discardCount > 20:
+                linearSearch(seq,'a')
+                discardCount = 21
             if len(results)==4 and checkingCounter==1:
                 initMappingCounter = initMappingCounter+1 
             elif len(results)!=4 and checkingCounter==1:
                 initMappingCounter = 0
-            if (initMappingCounter > 4 and mappingCounter == 1):
+            if (initMappingCounter > 2 and mappingCounter == 1):
                 checkingCounter = 2
                 print ("in here ")
+                mappingCounter = 0
+                startLSBposition = results[0]
+                startMSBposition = results[1]
+                startLSBposition = results[2]
+                startLSB2position = results[3]
             print (results)
+            print (startLSBposition)
             results = []
             seq = []
             count = 0 
