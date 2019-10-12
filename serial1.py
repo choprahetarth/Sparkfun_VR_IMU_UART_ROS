@@ -11,6 +11,7 @@ ser = serial.Serial(
 
 
 #this will store the line
+x=0
 seq = []
 results =[]
 part = []
@@ -23,21 +24,14 @@ initMappingCounter = 0
 discardCount = 0 
 mappingCounter = 1
 checkingCounter = 1
-#startLSBposition = 0
+startLSBposition = 0
+positionIncrement = 0 
+initialPositionCounter = 0
+shiftingCounter = 1
+nextArrayCounter = 0
 #startMSBposition = 0 
 #startLSB2position = 0
-startMSB2position = 0
-
-#var = [header1,header2,header3,header4,index1,\
-#    index2,yawLSB1,yawLSB2,yawMSB1,yawMSB2,pitchLSB1,\
-#    pitchLSB2,pitchMSB,pitchMSB2,rollLSB1,rollLSB2,rollMSB1,\
-#    rollMSB2,xAccelLSB1,xAccelLSB2,xAccelMSB1,xAccelMSB2,\
-#    yAccelLSB1,yAccelLSB2,yAccelMSB1,yAccelMSB2,\
-#    zAccelLSB1,zAccelLSB2,zAccelMSB1,zAccelMSB2,\
-#    reserved1LSB1,reserved1LSB2,reserved1MSB1,reserved1MSB2,\
-#    reserved2LSB1,reserved2LSB2,reserved2MSB1,reserved2MSB2,\
-#    reserved3LSB1,reserved3LSB2,reserved3MSB1,reserved3MSB2,\
-#    csumLSB1,csumLSB2, csumMSB1, csumMSB2]
+#startMSB2position = 0
 
 def linearSearch(arr, x):
     counter = 0  
@@ -57,7 +51,7 @@ while True:
         if count == 38:
             discardCount = discardCount +1
             if discardCount > 20:
-                linearSearch(seq,'a')
+                linearSearch(seq,'a')       #started the technique to check the initial position
                 discardCount = 21
             if len(results)==4 and checkingCounter==1:
                 initMappingCounter = initMappingCounter+1 
@@ -66,10 +60,34 @@ while True:
             if (initMappingCounter > 1 and mappingCounter == 1):
                 checkingCounter = 2
                 mappingCounter = 2
-                part = results
-                startMSB2position = part[3]
-#            if (checkingCounter ==2 and mappingCounter ==2):
-            print (seq)
+                startLSBposition = results[0]                      #after this has been done, the starting position is returned
+            if (checkingCounter ==2 and mappingCounter ==2):
+                alternateCounter = 0
+                alternateCounter = alternateCounter +1
+                while shiftingCounter == 1:
+                    if (alternateCounter % 2 != 0):
+                        break
+                    initialPositionCounter = startLSBposition + positionIncrement    # a = startposition + x
+                    if (len(seq)-initialPositionCounter == 0):
+                        shiftingCounter = 0
+                        nextArrayCounter = 1
+                        positionIncrement = 0
+                    else:
+                        part.append(seq[initialPositionCounter])
+                        positionIncrement= positionIncrement +1
+                while nextArrayCounter == 1:
+                    if (alternateCounter % 2 == 0):
+                        break
+                    if (x <= startLSBposition):
+                        part.append(seq[x])
+                    else:
+                        nextArrayCounter = 2
+                        x = 0
+                        shiftingCounter = 1
+                    x = x +1
+            print(seq)
+            print(part)
+            part = []            
             results = []
             seq = []
             count = 0 
