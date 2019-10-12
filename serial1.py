@@ -23,10 +23,21 @@ initMappingCounter = 0
 discardCount = 0 
 mappingCounter = 1
 checkingCounter = 1
-startLSBposition = 0
-startMSBposition = 0 
-startLSB2position = 0
+#startLSBposition = 0
+#startMSBposition = 0 
+#startLSB2position = 0
 startMSB2position = 0
+
+#var = [header1,header2,header3,header4,index1,\
+#    index2,yawLSB1,yawLSB2,yawMSB1,yawMSB2,pitchLSB1,\
+#    pitchLSB2,pitchMSB,pitchMSB2,rollLSB1,rollLSB2,rollMSB1,\
+#    rollMSB2,xAccelLSB1,xAccelLSB2,xAccelMSB1,xAccelMSB2,\
+#    yAccelLSB1,yAccelLSB2,yAccelMSB1,yAccelMSB2,\
+#    zAccelLSB1,zAccelLSB2,zAccelMSB1,zAccelMSB2,\
+#    reserved1LSB1,reserved1LSB2,reserved1MSB1,reserved1MSB2,\
+#    reserved2LSB1,reserved2LSB2,reserved2MSB1,reserved2MSB2,\
+#    reserved3LSB1,reserved3LSB2,reserved3MSB1,reserved3MSB2,\
+#    csumLSB1,csumLSB2, csumMSB1, csumMSB2]
 
 def linearSearch(arr, x):
     counter = 0  
@@ -52,16 +63,13 @@ while True:
                 initMappingCounter = initMappingCounter+1 
             elif len(results)!=4 and checkingCounter==1:
                 initMappingCounter = 0
-            if (initMappingCounter > 2 and mappingCounter == 1):
+            if (initMappingCounter > 1 and mappingCounter == 1):
                 checkingCounter = 2
-                print ("in here ")
-                mappingCounter = 0
-                startLSBposition = results[0]
-                startMSBposition = results[1]
-                startLSBposition = results[2]
-                startLSB2position = results[3]
-            print (results)
-            print (startLSBposition)
+                mappingCounter = 2
+                part = results
+                startMSB2position = part[3]
+#            if (checkingCounter ==2 and mappingCounter ==2):
+            print (seq)
             results = []
             seq = []
             count = 0 
