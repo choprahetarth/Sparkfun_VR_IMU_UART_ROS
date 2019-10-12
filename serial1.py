@@ -11,13 +11,16 @@ ser = serial.Serial(
 
 
 #this will store the line
-x=0
+x=1
 seq = []
 results =[]
 part = []
+part2 = []
+part3=[]
 count = 0
 cNew = 0 
 reserveBITCounter = 0
+additionCounter =1
 queueChecker = 1
 position = 0 
 initMappingCounter = 0
@@ -29,9 +32,8 @@ positionIncrement = 0
 initialPositionCounter = 0
 shiftingCounter = 1
 nextArrayCounter = 0
-#startMSBposition = 0 
-#startLSB2position = 0
-#startMSB2position = 0
+alternateCounter = 0
+
 
 def linearSearch(arr, x):
     counter = 0  
@@ -62,36 +64,39 @@ while True:
                 mappingCounter = 2
                 startLSBposition = results[0]                      #after this has been done, the starting position is returned
             if (checkingCounter ==2 and mappingCounter ==2):
-                alternateCounter = 0
                 alternateCounter = alternateCounter +1
                 while shiftingCounter == 1:
                     if (alternateCounter % 2 != 0):
+                        print("i came here")
                         break
-                    initialPositionCounter = startLSBposition + positionIncrement    # a = startposition + x
+                    initialPositionCounter = startLSBposition + positionIncrement
                     if (len(seq)-initialPositionCounter == 0):
                         shiftingCounter = 0
                         nextArrayCounter = 1
                         positionIncrement = 0
                     else:
                         part.append(seq[initialPositionCounter])
+                        part3.append(seq[initialPositionCounter])
                         positionIncrement= positionIncrement +1
+                additionCounter = additionCounter+1
                 while nextArrayCounter == 1:
                     if (alternateCounter % 2 == 0):
                         break
                     if (x <= startLSBposition):
-                        part.append(seq[x])
+                        part2.append(seq[x-1])
+                        part3.append(seq[x-1])
                     else:
                         nextArrayCounter = 2
                         x = 0
                         shiftingCounter = 1
                     x = x +1
-            print(seq)
-            print(part)
-            part = []            
+                if (additionCounter == 2):
+                    print(part3)
+                    part3=[]
+                    additionCounter = 0     
             results = []
+            part=[]
+            part2=[]
             seq = []
             count = 0 
 ser.close()
-
-
-    
