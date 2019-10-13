@@ -33,6 +33,25 @@ initialPositionCounter = 0
 shiftingCounter = 1
 nextArrayCounter = 0
 alternateCounter = 0
+INDEX=0
+YAW1=0 
+YAW2=0 
+PITCH1=0 
+PITCH2=0 
+ROLL1=0 
+ROLL2=0 
+XACCEL1=0 
+XACCEL2= 0 
+YACCEL1=0 
+YACCEL2=0 
+ZACCEL1=0
+ZACCEL2=0 
+YAW=0
+PITCH=0
+ROLL=0
+XACCEL=0
+YACCEL=0
+ZACCEL=0
 
 
 
@@ -47,12 +66,28 @@ def linearSearch(arr, x):
     return results
 
 
-#def namingFunction():
-#    counter = 0 
-#    while(counter < 2):
-#        counter = counter+1
-#        discardValueFlag = 1
-#    if (discardValueFlag == 1 )
+def namingFunction(array1):
+    INDEX = array1[4]+array1[5]
+    YAW1 = array1[6]+array1[7]
+    YAW2 = array1[8]+array1[9]
+    PITCH1 = array1[10]+array1[11]
+    PITCH2 = array1[12]+array1[13]
+    ROLL1 = array1[14]+array1[15]
+    ROLL2 = array1[16]+array1[17]
+    XACCEL1 = array1[18]+array1[19]
+    XACCEL2 = array1[20]+array1[21]
+    YACCEL1 = array1[22]+array1[23]
+    YACCEL2 = array1[24]+array1[25]
+    ZACCEL1 = array1[26]+array1[27]
+    ZACCEL2 = array1[28]+array1[29]
+    YAW = 0.01 * int(YAW2,16) + int(YAW1,16)
+    PITCH = 0.01 * int(PITCH2,16) + int(PITCH1,16)
+    ROLL = 0.01 * int(ROLL2,16) + int(ROLL1,16)
+    XACCEL = 0.001 * int(XACCEL2,16) + int(XACCEL1,16)
+    YACCEL = 0.001 * int(YACCEL2,16) + int(YACCEL1,16)
+    ZACCEL = 0.001 * int(ZACCEL2,16) + int(ZACCEL1,16)
+    print(ROLL)
+    return ZACCEL2, ZACCEL1,YACCEL1, YACCEL2, XACCEL1, XACCEL2,ROLL1,ROLL2,PITCH1,PITCH2,YAW1,YAW2,INDEX,YAW,PITCH,ROLL,XACCEL,YACCEL,ZACCEL
 
 while True:
     for c in ser.readline().hex():
@@ -75,7 +110,6 @@ while True:
                 alternateCounter = alternateCounter +1
                 while shiftingCounter == 1:
                     if (alternateCounter % 2 != 0):
-                        print("i came here")
                         break
                     initialPositionCounter = startLSBposition + positionIncrement
                     if (len(seq)-initialPositionCounter == 0):
@@ -99,8 +133,10 @@ while True:
                         shiftingCounter = 1
                     x = x +1
                 if (additionCounter == 2):
-                    print(part3)
-                    namingFunction()
+                    if (len(part3) == 0):
+                        pass
+                    else:
+                        namingFunction(part3)
                     part3=[]
                     additionCounter = 0 
             results = []
