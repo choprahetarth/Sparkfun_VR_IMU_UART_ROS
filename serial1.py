@@ -35,6 +35,7 @@ nextArrayCounter = 0
 alternateCounter = 0
 
 
+
 def linearSearch(arr, x):
     counter = 0  
     while counter < len(arr):
@@ -45,6 +46,13 @@ def linearSearch(arr, x):
             counter = counter +1
     return results
 
+
+#def namingFunction():
+#    counter = 0 
+#    while(counter < 2):
+#        counter = counter+1
+#        discardValueFlag = 1
+#    if (discardValueFlag == 1 )
 
 while True:
     for c in ser.readline().hex():
@@ -92,8 +100,9 @@ while True:
                     x = x +1
                 if (additionCounter == 2):
                     print(part3)
+                    namingFunction()
                     part3=[]
-                    additionCounter = 0     
+                    additionCounter = 0 
             results = []
             part=[]
             part2=[]
