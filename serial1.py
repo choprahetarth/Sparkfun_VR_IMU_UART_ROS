@@ -52,7 +52,8 @@ ROLL=0
 XACCEL=0
 YACCEL=0
 ZACCEL=0
-
+yawMultiplier = 1
+pitchMultiplier = 1
 
 
 def linearSearch(arr, x):
@@ -65,6 +66,11 @@ def linearSearch(arr, x):
             counter = counter +1
     return results
 
+def twos_complement(hexstr,bits):
+    value = int(hexstr,16)
+    if value & (1 << (bits-1)):
+        value -= 1 << bits
+    return value
 
 def namingFunction(array1):
     INDEX = array1[4]+array1[5]
@@ -80,13 +86,17 @@ def namingFunction(array1):
     YACCEL2 = array1[24]+array1[25]
     ZACCEL1 = array1[26]+array1[27]
     ZACCEL2 = array1[28]+array1[29]
-    YAW = 0.01 * int(YAW2,16) + int(YAW1,16)
-    PITCH = 0.01 * int(PITCH2,16) + int(PITCH1,16)
+    YAW = (0.01*(twos_complement(YAW1,8)) + twos_complement(YAW2,8))
+    yawMultiplier = 2.506963788300836 if YAW < 0 else 2.542372881355932
+    YAW = YAW * yawMultiplier
+    PITCH = (0.01 * twos_complement(PITCH1,8)) + twos_complement(PITCH2,8)
+    pitchMultiplier = 2.486187845303867 if PITCH < 0 else 2.54957507082153
+    PITCH = PITCH * pitchMultiplier
+    print(PITCH)
     ROLL = 0.01 * int(ROLL2,16) + int(ROLL1,16)
     XACCEL = 0.001 * int(XACCEL2,16) + int(XACCEL1,16)
     YACCEL = 0.001 * int(YACCEL2,16) + int(YACCEL1,16)
     ZACCEL = 0.001 * int(ZACCEL2,16) + int(ZACCEL1,16)
-    print(ROLL)
     return ZACCEL2, ZACCEL1,YACCEL1, YACCEL2, XACCEL1, XACCEL2,ROLL1,ROLL2,PITCH1,PITCH2,YAW1,YAW2,INDEX,YAW,PITCH,ROLL,XACCEL,YACCEL,ZACCEL
 
 while True:
@@ -138,7 +148,7 @@ while True:
                     else:
                         namingFunction(part3)
                     part3=[]
-                    additionCounter = 0 
+                    additionCounter = 0
             results = []
             part=[]
             part2=[]
