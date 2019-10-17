@@ -54,6 +54,7 @@ YACCEL=0
 ZACCEL=0
 yawMultiplier = 1
 pitchMultiplier = 1
+rollMultiplier = 1
 
 
 def linearSearch(arr, x):
@@ -92,11 +93,13 @@ def namingFunction(array1):
     PITCH = (0.01 * twos_complement(PITCH1,8)) + twos_complement(PITCH2,8)
     pitchMultiplier = 2.486187845303867 if PITCH < 0 else 2.54957507082153
     PITCH = PITCH * pitchMultiplier
-    print(PITCH)
-    ROLL = 0.01 * int(ROLL2,16) + int(ROLL1,16)
-    XACCEL = 0.001 * int(XACCEL2,16) + int(XACCEL1,16)
-    YACCEL = 0.001 * int(YACCEL2,16) + int(YACCEL1,16)
-    ZACCEL = 0.001 * int(ZACCEL2,16) + int(ZACCEL1,16)
+    ROLL = (0.01 * twos_complement(ROLL1,8)) + twos_complement(ROLL2,8)
+    rollMultiplier = 2.510460251046025 if ROLL < 0 else 2.542372881355932
+    ROLL = ROLL * rollMultiplier
+    XACCEL = 0.001 * twos_complement(XACCEL1,8) + twos_complement(XACCEL2,8)
+    YACCEL = 0.001 * twos_complement(YACCEL1,8) + twos_complement(YACCEL2,8)
+    ZACCEL = 0.001 * twos_complement(ZACCEL1,8) + twos_complement(ZACCEL2,8)
+    print("Yaw - ", YAWa, "Pitch - ", PITCH, "Roll - ", ROLL, "Accelerations - ", XACCEL,YACCEL,ZACCEL)
     return ZACCEL2, ZACCEL1,YACCEL1, YACCEL2, XACCEL1, XACCEL2,ROLL1,ROLL2,PITCH1,PITCH2,YAW1,YAW2,INDEX,YAW,PITCH,ROLL,XACCEL,YACCEL,ZACCEL
 
 while True:
