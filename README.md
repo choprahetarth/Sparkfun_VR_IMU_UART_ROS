@@ -8,9 +8,9 @@ Just Plug and Play!
 ## Steps Required for using the ROS Version
 - Connect the IMU
 - Paste the serial_uart_rvc_ros.py file to a package
-''' 
+```
 catkin_make 
-'''
+```
 - rosrun <package_name> serial_uart_rvc_ros
 
 ## Steps to use the Non-ROS Version (just for visualizing)
