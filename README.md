@@ -11,11 +11,12 @@ Just Plug and Play!
 ```
 catkin_make 
 ```
-- rosrun <package_name> serial_uart_rvc_ros
+and then 
+```rosrun <package_name> serial_uart_rvc_ros```
 
 ## Steps to use the Non-ROS Version (just for visualizing)
-- Connect the IMU
-- python3 vizualize.py
+- Connect the IMU, and use the command
+```python3 vizualize.py```
 
 
 ## Working Demo
