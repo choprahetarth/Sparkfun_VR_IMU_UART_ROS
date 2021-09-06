@@ -12,7 +12,9 @@ Just Plug and Play!
 catkin_make 
 ```
 and then 
-```rosrun <package_name> serial_uart_rvc_ros```
+```
+rosrun <package_name> serial_uart_rvc_ros
+```
 
 ## Steps to use the Non-ROS Version (just for visualizing)
 - Connect the IMU, and use the command
