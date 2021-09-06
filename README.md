@@ -10,7 +10,7 @@ Just Plug and Play!
 
 
 ## Working Demo
-[Working](https://raw.githubusercontent.com/choprahetarth/Sparkfun_VR_IMU_UART_ROS/master/ezgif-3-f08b2f45a125.gif)
+![Working](https://raw.githubusercontent.com/choprahetarth/Sparkfun_VR_IMU_UART_ROS/master/ezgif-3-f08b2f45a125.gif)
 
 ## TO DO -
 - Filter the data incoming from the IMU by applying a Kalman/Complimentary Filter
