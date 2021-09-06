@@ -9,6 +9,8 @@ Just Plug and Play!
 - rosrun <package_name> serial_uart_rvc_ros
 
 
-TO DO meanwhile:
-1- Remove ROS from the vizualize code and run it separately.
-2- Filter the data incoming from the IMU by applying a Kalman/Complimentary Filter
+## Working Demo
+[Working](https://raw.githubusercontent.com/choprahetarth/Sparkfun_VR_IMU_UART_ROS/master/ezgif-3-f08b2f45a125.gif)
+
+## TO DO -
+- Filter the data incoming from the IMU by applying a Kalman/Complimentary Filter
